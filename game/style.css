@@ -1,0 +1,255 @@
+/* style.css — Lantern Hunt layout: warm night-market colours, two picture
+   panels side by side, HUD above, found-list below, overlays on top. */
+:root {
+  --ink: #f6ead2;
+  --dim: #cbb98f;
+  --panel: #241a33;
+  --panel2: #2e2142;
+  --gold: #ffd23e;
+  --teal: #2fa8a0;
+  --red: #e2483d;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #171226;
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+#app {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 14px 20px 18px;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 2px solid #4a3566;
+  padding-bottom: 8px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+header h1 span { color: var(--teal); }
+
+header .tagline {
+  margin: 0;
+  color: var(--dim);
+  font-style: italic;
+  font-size: 15px;
+}
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 2px;
+  font-size: 17px;
+  flex-wrap: wrap;
+}
+
+#hud .pill {
+  background: var(--panel2);
+  border: 1px solid #4a3566;
+  border-radius: 999px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+#hud-counter {
+  background: #3a2b12;
+  border-color: var(--gold);
+  color: var(--gold);
+  font-weight: bold;
+}
+
+#hud-time.urgent {
+  background: #571b1b;
+  border-color: var(--red);
+  color: #ffb3ad;
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.55; } }
+
+#hud-combo { color: #ff9d5c; font-weight: bold; }
+
+#hud .spacer { flex: 1; }
+
+button {
+  font-family: inherit;
+  font-size: 15px;
+  background: var(--gold);
+  color: #241a33;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover { filter: brightness(1.1); }
+
+button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #6b5a8a;
+}
+
+#panels {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  position: relative;
+}
+
+.panel-wrap {
+  position: relative;
+  background: var(--panel);
+  border: 2px solid #4a3566;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.panel-wrap h2 {
+  margin: 2px 0 6px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.panel-wrap h2 b { color: var(--ink); }
+
+canvas {
+  display: block;
+  width: 560px;
+  height: 420px;
+  border-radius: 6px;
+  cursor: crosshair;
+  background: #1b2340;
+}
+
+#vs {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #241a33;
+  font-weight: bold;
+  font-size: 18px;
+  border: 3px solid #171226;
+}
+
+#found-bar {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--dim);
+  min-height: 20px;
+  text-align: center;
+}
+
+#controls {
+  margin-top: 8px;
+  text-align: center;
+  color: var(--dim);
+  font-size: 14px;
+}
+
+#controls kbd {
+  background: var(--panel2);
+  border: 1px solid #6b5a8a;
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+#pause-note {
+  display: none;
+  text-align: center;
+  color: var(--gold);
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 10, 28, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.overlay.hidden, .hidden { display: none !important; }
+
+.card {
+  width: 620px;
+  max-width: 92vw;
+  background: var(--panel2);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 28px 34px;
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  color: var(--gold);
+}
+
+.card p { font-size: 17px; line-height: 1.5; color: var(--ink); }
+
+.card .big {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.card .levels { text-align: left; font-size: 16px; line-height: 1.9; }
+
+.card button { font-size: 18px; padding: 10px 22px; margin-top: 12px; }
+
+#howto {
+  display: none;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--dim);
+  border-top: 1px solid #4a3566;
+  margin-top: 14px;
+  padding-top: 10px;
+}
+
+#howto.open { display: block; }
+
+#status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
